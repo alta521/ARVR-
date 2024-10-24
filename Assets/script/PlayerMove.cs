@@ -6,26 +6,36 @@ public class PlayerMove : MonoBehaviour
 {
     public float speed = 5f;
     Camera cam;
+    CharacterController characterController;
+    public Animator ARani;
+    public float H;
+    public float V;
+
 
     void Start()
     {
         cam = Camera.main;
+        ARani = GetComponent<Animator>();
     }
 
     void Update()
     {
         //입력값이있으면 출력
         Move();
+        ARani.SetFloat("HM", H);
+        ARani.SetFloat("VM", V);
     }
     void Move()
     {
         //사용자의 입력에 따라 값을 받음
-        float H = Input.GetAxis("Horizontal");
-        float V = Input.GetAxis("Vertical");
+        H = Input.GetAxis("Horizontal");
+        V = Input.GetAxis("Vertical");
         //Vector3 dir = Vector3.right*H + Vector3.forward*V;
         //선형보간 잊었으니 공부할것.
         //앞뒤 방향 설정
-        Vector3 dir = new Vector3(H, 0, V);
+        Vector3 dirH = transform.right * H;
+        Vector3 dirV = transform.forward * V;
+        Vector3 dir = dirH + dirV;
         //카메라 앞방향으로 현재 방향의 앞방향을 재설정.(세계의 축과 다르게 나의 축을 이게 앞방향이다 재설정하는거임.)
         dir = cam.transform.TransformDirection(dir);
         dir.y = 0;
@@ -34,5 +44,6 @@ public class PlayerMove : MonoBehaviour
         transform.position += dir*speed*Time.deltaTime;
         //좌우앞뒤 입력값을 통해 블렌드트리를 활용하여 애니메이션 설정
 
+        //camrot에 맞추어 회전해야함..
     }
 }

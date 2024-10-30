@@ -31,11 +31,12 @@ public class PlayerMove : MonoBehaviour
         H = Input.GetAxis("Horizontal");
         V = Input.GetAxis("Vertical");
         //Vector3 dir = Vector3.right*H + Vector3.forward*V;
-        //선형보간 잊었으니 공부할것.
+        //선형보간??
         //앞뒤 방향 설정
-        Vector3 dirH = transform.right * H;
-        Vector3 dirV = transform.forward * V;
-        Vector3 dir = dirH + dirV;
+        //Vector3 dirH = transform.right * H;
+        //Vector3 dirV = transform.forward * V;
+        //Vector3 dir = dirH + dirV;
+        Vector3 dir = new Vector3(H, 0, V);
         //카메라 앞방향으로 현재 방향의 앞방향을 재설정.(세계의 축과 다르게 나의 축을 이게 앞방향이다 재설정하는거임.)
         dir = cam.transform.TransformDirection(dir);
         dir.y = 0;

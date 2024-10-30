@@ -23,7 +23,7 @@ public class PlayerRot : MonoBehaviour
         ry += mx * rotSpeed * Time.deltaTime;
         //회전 제한
         rx = Mathf.Clamp(rx, -75, 75);
-        ry = Mathf.Clamp(ry, -75,75);
+        //ry = Mathf.Clamp(ry, -75,75);
         //카메라 회전
         transform.eulerAngles = new Vector3(-rx, ry, 0);
 
